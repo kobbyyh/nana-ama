@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pelvy Akua Addo</title>
+    <link rel="icon" href="./images/4.jpg" type="image/x-icon">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg1: #FFDEE9;
+            --bg2: #B5FFFC;
+            --accent: #FF6B9A;
+            --glass: rgba(255, 255, 255, 0.14);
+            --glass-2: rgba(255, 255, 255, 0.08);
+            --card-radius: 18px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        /* html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            color: #222;
+        } */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            color: #222;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wrap {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+            gap: 24px;
+        }
+
+        .card {
+            width: 980px;
+            max-width: 97vw;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 22px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
+            border-radius: var(--card-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* left panel - gallery */
+        .left {
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+            padding: 10px;
+            gap: 12px;
+        }
+
+        .main-photo {
+            width: 100%;
+            height: 290px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transition: transform .5s ease;
+            cursor: pointer;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .main-photo:hover {
+            transform: scale(1.03) rotate(-1deg);
+        }
+
+        .thumbs {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .thumb {
+            width: 64px;
+            height: 64px;
+            border-radius: 10px;
+            object-fit: cover;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: transform .2s ease;
+        }
+
+        .thumb:active,
+        .thumb:hover {
+            transform: translateY(-4px);
+        }
+
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        /* right panel - message & buttons */
+        .right {
+            padding: 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: -0.4px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .subtitle {
+            color: #6b6b6b;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .message {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.5));
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            line-height: 1.45;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .cta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .btn {
+            border: 0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-yes {
+            background: linear-gradient(90deg, #FF8AB3, #FF6B9A);
+            color: white;
+            transform: perspective(600px) translateZ(0);
+        }
+
+        .btn-no {
+            background: transparent;
+            border: 2px solid rgba(0, 0, 0, 0.07);
+            color: #333;
+        }
+
+        .small {
+            font-size: 13px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        /* heart & accents */
+        .floating-hearts {
+            position: absolute;
+            right: -40px;
+            top: -40px;
+            transform: rotate(14deg);
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0.9;
+        }
+
+        .heart {
+            width: 140px;
+            height: 140px;
+            background:
+                radial-gradient(circle at 30% 30%, #fff 12%, transparent 13%),
+                linear-gradient(135deg, #FF8AB3, #FF6B9A);
+            transform: rotate(-45deg);
+            border-radius: 20px;
+            filter: drop-shadow(0 8px 30px rgba(255, 107, 154, 0.25));
+            animation: beat 1.8s infinite;
+            position: relative;
+            display: inline-block;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF8AB3, #FF6B9A);
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 50px;
+            top: 0;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(0.98) rotate(-45deg)
+            }
+
+            40% {
+                transform: scale(1.06) rotate(-45deg)
+            }
+
+            100% {
+                transform: scale(0.98) rotate(-45deg)
+            }
+        }
+
+        /* modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .18s ease;
+        }
+
+        .modal-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            width: 520px;
+            max-width: 92vw;
+            background: linear-gradient(180deg, #fff, #fffaf2);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal h2 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+        }
+
+        .modal p {
+            margin: 0 0 12px 0;
+            color: #555;
+        }
+
+        /* confetti canvas covers top */
+        #confetti-canvas {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        /* playful footer note */
+        .footer-note {
+            font-size: 12px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        @media (max-width:820px) {
+            .card {
+                grid-template-columns: 1fr;
+            }
+
+            .left {
+                order: 2
+            }
+
+            .right {
+                order: 1
+            }
+        }
+
+
+        /* background */
+        .bg-collage {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        }
+
+        .bg-collage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('./images/4.jpg');
+            background-size: 140px;
+            background-repeat: repeat;
+            opacity: 0.14;
+            filter: blur(1.8px);
+            mix-blend-mode: soft-light;
+            animation: slowMove 40s linear infinite alternate;
+            transform: rotate(4deg);
+        }
+
+        .bg-collage::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('./images/4.jpg');
+            background-size: 200px;
+            background-repeat: repeat;
+            opacity: 0.9;
+            filter: blur(3px);
+            mix-blend-mode: overlay;
+            animation: slowMove2 55s linear infinite alternate;
+            transform: rotate(-3deg);
+        }
+
+        @keyframes slowMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 200px 200px;
+            }
+        }
+
+        @keyframes slowMove2 {
+            0% {
+                background-position: 100px 50px;
+            }
+
+            100% {
+                background-position: -150px -100px;
+            }
+        }
+
+        /* Make sure the rest of the content is above the collage */
+        .wrap,
+        .card,
+        #confetti-canvas {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-collage"></div>
+    <div class="wrap">
+        <div class="card" role="main" aria-labelledby="title">
+            <div class="left" aria-hidden="false">
+                <img id="mainPhoto" src="./images/4.jpg" alt="Pelvy smiling" class="main-photo" />
+                <div class="thumbs" aria-hidden="true">
+
+                    <video id="cuteVideo" controls autoplay loop muted playsinline
+                        style="width:100%; height:150px; object-fit:cover; border-radius:10px; border:2px solid rgba(255,255,255,0.6);">
+                        <source src="./images/1.mp4" type="video/mp4">
+
+                        Your browser does not support the video tag.
+                    </video>
+                    <video id="cuteVideo" controls autoplay loop muted playsinline
+                        style="width:100%; height:150px; object-fit:cover; border-radius:10px; border:2px solid rgba(255,255,255,0.6);">
+                        <source src="./images/2.mp4" type="video/mp4">
+
+                        Your browser does not support the video tag.
+                    </video>
+                    <video id="cuteVideo" controls autoplay loop muted playsinline
+                        style="width:100%; height:150px; object-fit:cover; border-radius:10px; border:2px solid rgba(255,255,255,0.6);">
+                        <source src="./images/3.mp4" type="video/mp4">
+
+                        Your browser does not support the video tag.
+                    </video>
+                    <video id="cuteVideo" controls autoplay loop muted playsinline
+                        style="width:100%; height:150px; object-fit:cover; border-radius:10px; border:2px solid rgba(255,255,255,0.6);">
+                        <source src="./images/5.mp4" type="video/mp4">
+
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="video-wrapper">
+                    <video id="cuteVideo" controls autoplay loop muted playsinline
+                        style="width:100%; height:150px; object-fit:cover; border-radius:10px; border:2px solid rgba(255,255,255,0.6);">
+                        <source src="./images/6.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+            </div>
+
+            <div class="right">
+                <div id="intro" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,#FFDEE9,#B5FFFC);font-size:28px;font-weight:600;
+color:#ff4f87;z-index:999;transition:opacity .8s ease;">Hey, Pelvy 💖</div>
+
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <h1 id="title">Pelvy <span style="font-size:14px;color:#FF6B9A;">💫</span></h1>
+                </div>
+                <div class="subtitle">I made this just for you — yes, you ❤️</div>
+
+                <div class="message" id="messageBox">
+                    <p style="margin:0 0 8px 0;">
+                        Hey <strong>Pelvy</strong> — I couldn't think of a normal way to ask you something important, so
+                        I made this.
+                        You make every little thing brighter, and I want to be someone who makes you smile every day.
+                        I'd like to profess how I feel towards you and if all things work out, would want to call you
+                        <strong style="color: rgb(197, 12, 43);">Mine.</strong>
+                    </p>
+
+                    <p style="margin:0;">
+                        Let’s skip the small talk...you, me, a simple <em>“Yes!”</em>, and WhatsApp will take it from
+                        there but if timing isn’t on our side, hit “Maybe later”, and I will understand it perfectly.
+
+                    </p>
+                </div>
+
+                <div class="cta">
+                    <button class="btn btn-yes" id="yesBtn">💖 Yes! I'd love to start something with you.</button>
+                    <button class="btn btn-no" id="noBtn">Maybe later🥲</button>
+                </div>
+
+                <div class="footer-note">
+                    Made with a little creativity and a lot of heart. <br> from <em>Kay!?</em>🥷to you
+
+                </div>
+            </div>
+
+            <div class="floating-hearts" aria-hidden="true">
+                <div class="heart" title="heart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal" role="document">
+            <h2>Will you be my girlfriend?</h2>
+            <p>If you click <strong> "Yes! I'd love to start something with you."</strong> This will open WhatsApp with
+                this
+                message pre-filled. You have to press send,
+                that way I know they are your beautiful words too 😌</p>
+            <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:10px;">
+                <button class="btn btn-no" id="modalCancel">Cancel</button>
+                <button class="btn btn-yes" id="modalConfirm">Yes, I will 💍</button>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <script>
+
+        const YOUR_WHATSAPP_NUMBER = "233542367268";
+
+        const prefilledMessage = "Yes, I will be your girlfriend 💖 - Pelvy";
+
+
+        document.querySelectorAll('.thumb').forEach(t => {
+            t.addEventListener('click', e => {
+                const full = t.dataset.full || t.src;
+                document.getElementById('mainPhoto').src = full;
+            });
+        });
+
+        const backdrop = document.getElementById('modalBackdrop');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const modalCancel = document.getElementById('modalCancel');
+        const modalConfirm = document.getElementById('modalConfirm');
+
+        function showModal() {
+            backdrop.classList.add('show');
+            backdrop.setAttribute('aria-hidden', 'false');
+        }
+        function hideModal() {
+            backdrop.classList.remove('show');
+            backdrop.setAttribute('aria-hidden', 'true');
+        }
+
+        noBtn.addEventListener('click', () => {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = "<p style='margin:0 0 8px 0;'>No problem — take your time. If you change your mind, this little site will be here waiting with butterflies 🦋</p><div class='small'>You can refresh the page to see the original message again.</div>";
+            const card = document.querySelector('.card');
+            card.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(0)' }], { duration: 520 });
+        });
+
+        yesBtn.addEventListener('click', showModal);
+        modalCancel.addEventListener('click', hideModal);
+
+        modalConfirm.addEventListener('click', () => {
+            hideModal();
+            celebrate();
+
+            setTimeout(() => {
+                const phone = YOUR_WHATSAPP_NUMBER.trim();
+                if (!phone || phone.includes("YOUR_PHONE")) {
+                    // If the user didn't update the placeholder, open a generic share link to whatsapp web with only text (it will prompt for a contact)
+                    const shareOnly = "https://api.whatsapp.com/send?text=" + encodeURIComponent(prefilledMessage);
+                    window.open(shareOnly, "_blank");
+                } else {
+                    const url = "https://api.whatsapp.com/send?phone=" + encodeURIComponent(phone) + "&text=" + encodeURIComponent(prefilledMessage);
+                    window.open(url, "_blank");
+                }
+            }, 900);
+        });
+
+
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let W = canvas.width = innerWidth;
+        let H = canvas.height = innerHeight;
+        window.addEventListener('resize', () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
+
+        function randomRange(min, max) { return Math.random() * (max - min) + min; }
+
+        function ConfettiParticle() {
+            this.x = randomRange(0, W);
+            this.y = randomRange(-H, 0);
+            this.size = randomRange(6, 12);
+            this.speed = randomRange(2, 6);
+            this.angle = randomRange(0, Math.PI * 2);
+            this.angularSpeed = randomRange(-0.1, 0.1);
+            this.color = `hsl(${Math.floor(randomRange(0, 360))} 85% 65%)`;
+            this.tilt = randomRange(-0.3, 0.3);
+        }
+        ConfettiParticle.prototype.update = function () {
+            this.y += this.speed;
+            this.x += Math.sin(this.y / 30) * 1.5;
+            this.angle += this.angularSpeed;
+            if (this.y > H + 30) { this.y = -10; this.x = randomRange(0, W); }
+        };
+        ConfettiParticle.prototype.draw = function () {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.beginPath();
+            ctx.rect(-this.size / 2, -this.size / 2, this.size, this.size);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        };
+
+        let confetti = [];
+        function initConfetti(count) {
+            confetti = [];
+            for (let i = 0; i < count; i++) confetti.push(new ConfettiParticle());
+        }
+        initConfetti(80);
+
+        let confettiActive = false;
+        function animateConfetti() {
+            if (!confettiActive) return;
+            ctx.clearRect(0, 0, W, H);
+            for (let p of confetti) { p.update(); p.draw(); }
+            requestAnimationFrame(animateConfetti);
+        }
+
+        function celebrate() {
+            confettiActive = true;
+            initConfetti(120);
+            animateConfetti();
+            setTimeout(() => { confettiActive = false; ctx.clearRect(0, 0, W, H); }, 4000);
+            const heart = document.querySelector('.heart');
+            heart.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.25)' }, { transform: 'scale(1)' }], { duration: 800 });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hideModal();
+            if ((e.key === 'Enter' || e.key === ' ') && document.activeElement === yesBtn) showModal();
+        });
+
+        window.onload = () => {
+            document.querySelector('.card').animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 580, easing: 'cubic-bezier(.2,.9,.3,1)' });
+        };
+
+
+        window.addEventListener('load', () => {
+            const intro = document.getElementById('intro');
+            setTimeout(() => {
+                intro.style.opacity = '0';
+                setTimeout(() => intro.remove(), 800);
+            }, 1600);
+        });
+
+    </script>
+</body>
+
+</html>
