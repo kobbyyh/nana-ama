@@ -1,0 +1,370 @@
+:root {
+    --bg1: #FFDEE9;
+    --bg2: #B5FFFC;
+    --accent: #FF6B9A;
+    --glass: rgba(255, 255, 255, 0.14);
+    --glass-2: rgba(255, 255, 255, 0.08);
+    --card-radius: 18px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    font-family:'Poppins', system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    color: #222;
+    overflow-x: hidden;
+    /* prevent horizontal scroll only */
+    overflow-y: auto;
+    /* allow vertical scrolling */
+    position: relative;
+}
+
+.wrap {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    gap: 24px;
+}
+
+.card {
+    width: 980px;
+    max-width: 97vw;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 22px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
+    border-radius: var(--card-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+/* left panel - gallery */
+.left {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+    padding: 10px;
+    gap: 12px;
+}
+
+.main-photo {
+    width: 100%;
+    height: 290px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform .5s ease;
+    cursor: pointer;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+.main-photo:hover {
+    transform: scale(1.03) rotate(-1deg);
+}
+
+.thumbs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    transition: transform .2s ease;
+}
+
+.thumb:active,
+.thumb:hover {
+    transform: translateY(-4px);
+}
+
+.video-wrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+/* right panel - message & buttons */
+.right {
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+    letter-spacing: -0.4px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.subtitle {
+    color: #6b6b6b;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.message {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.5));
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    line-height: 1.45;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.btn {
+    border: 0;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.btn-yes {
+    background: linear-gradient(90deg, #FF8AB3, #FF6B9A);
+    color: white;
+    transform: perspective(600px) translateZ(0);
+}
+
+.btn-no {
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.07);
+    color: #333;
+}
+
+.small {
+    font-size: 13px;
+    color: #666;
+    margin-top: 6px;
+}
+
+/* heart & accents */
+.floating-hearts {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    transform: rotate(14deg);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.9;
+}
+
+.heart {
+    width: 140px;
+    height: 140px;
+    background:
+        radial-gradient(circle at 30% 30%, #fff 12%, transparent 13%),
+        linear-gradient(135deg, #FF8AB3, #FF6B9A);
+    transform: rotate(-45deg);
+    border-radius: 20px;
+    filter: drop-shadow(0 8px 30px rgba(255, 107, 154, 0.25));
+    animation: beat 1.8s infinite;
+    position: relative;
+    display: inline-block;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF8AB3, #FF6B9A);
+    top: -50px;
+    left: 0;
+}
+
+.heart::after {
+    left: 50px;
+    top: 0;
+}
+
+@keyframes beat {
+    0% {
+        transform: scale(0.98) rotate(-45deg)
+    }
+
+    40% {
+        transform: scale(1.06) rotate(-45deg)
+    }
+
+    100% {
+        transform: scale(0.98) rotate(-45deg)
+    }
+}
+
+/* modal */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    width: 520px;
+    max-width: 92vw;
+    background: linear-gradient(180deg, #fff, #fffaf2);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal h2 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.modal p {
+    margin: 0 0 12px 0;
+    color: #555;
+}
+
+/* confetti canvas covers top */
+#confetti-canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+/* playful footer note */
+.footer-note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 6px;
+}
+
+@media (max-width:820px) {
+    .card {
+        grid-template-columns: 1fr;
+    }
+
+    .left {
+        order: 2
+    }
+
+    .right {
+        order: 1
+    }
+}
+
+
+/* background */
+.bg-collage {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+}
+
+.bg-collage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('./images/3.jpg');
+    background-size: 140px;
+    background-repeat: repeat;
+    opacity: 0.14;
+    filter: blur(1.8px);
+    mix-blend-mode: soft-light;
+    animation: slowMove 40s linear infinite alternate;
+    transform: rotate(4deg);
+}
+
+.bg-collage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('./images/3.jpg');
+    background-size: 200px;
+    background-repeat: repeat;
+    opacity: 0.9;
+    filter: blur(3px);
+    mix-blend-mode: overlay;
+    animation: slowMove2 55s linear infinite alternate;
+    transform: rotate(-3deg);
+}
+
+@keyframes slowMove {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200px 200px;
+    }
+}
+
+@keyframes slowMove2 {
+    0% {
+        background-position: 100px 50px;
+    }
+
+    100% {
+        background-position: -150px -100px;
+    }
+}
+
+/* Make sure the rest of the content is above the collage */
+.wrap,
+.card,
+#confetti-canvas {
+    position: relative;
+    z-index: 2;
+}
